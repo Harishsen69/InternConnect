@@ -2,6 +2,13 @@
     margin: 0%;
     padding: 0%;
 }
+body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(pink, rgb(61, 61, 118));
+            padding: 5px;
+            height: 100vh;
+        }
+
 .maindiv{
     height: 100vh;
     width: 100%;
