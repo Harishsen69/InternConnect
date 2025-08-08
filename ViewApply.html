@@ -3,42 +3,74 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=div, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Apply Section</title>
+    <link rel="stylesheet" href="ViewApply.css">
 </head>
-<link rel="stylesheet" href="ViewApply.css">
 
 <body>
     <div class="maindiv">
         <div class="header" id="headtext">
             <h1>View Apply Section</h1>
         </div>
+
         <center>
             <input type="text" placeholder="Enter User Name" id="search">
+            <button id="searchBtn">
+                <span class="label">Search</span>
+            </button>
         </center>
-        <br>
 
-        <button>
-            <span class="transition"></span>
-            <span class="gradient"></span>
-            <span class="label">Search</span>
-        </button>
-        <br>
-        <br>
+        <br><br>
+
         <center>
-            <table border="2px" id="tables">
+            <table border="2" id="tables">
                 <tr>
-                    <td colspan="2">Username</td>
-                    <td colspan="3">Apply Company List</td>
+                    <th>Username</th>
+                    <th>Apply Company List</th>
                 </tr>
             </table>
         </center>
     </div>
-    </div>
+
+    <script>
+        // Get stored application data from localStorage
+        const appliedData = JSON.parse(localStorage.getItem("applications")) || [];
+
+        const table = document.getElementById("tables");
+
+        // Show all applied users initially
+        appliedData.forEach(entry => {
+            let row = table.insertRow();
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            cell1.textContent = entry.name; // from Apply form's "yourName"
+            cell2.textContent = entry.company;
+        });
+
+        // Search functionality
+        document.getElementById("searchBtn").addEventListener("click", () => {
+            const searchValue = document.getElementById("search").value.trim().toLowerCase();
+
+            table.innerHTML = `
+            <tr>
+                <th>Username</th>
+                <th>Apply Company List</th>
+            </tr>
+        `;
+
+            appliedData
+                .filter(entry => entry.name.toLowerCase().includes(searchValue))
+                .forEach(entry => {
+                    let row = table.insertRow();
+                    let cell1 = row.insertCell(0);
+                    let cell2 = row.insertCell(1);
+                    cell1.textContent = entry.name;
+                    cell2.textContent = entry.company;
+                });
+        });
+    </script>
 
 </body>
-<script>
-    localStorage.setItem(key,'usename')
-</script>
 
 </html>

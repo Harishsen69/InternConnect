@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Internship</title>
+    <link rel="stylesheet" href="ApplyForm.css">
+</head>
+<body>
+    <div class="apply-container">
+        <h1>Apply for Internship</h1>
+        <form id="applyForm">
+            <label>Internship Title:</label>
+            <input type="text" id="internshipTitle" readonly>
+
+            <label>Company:</label>
+            <input type="text" id="companyName" readonly>
+
+            <label>Your Name:</label>
+            <input type="text" id="yourName" required>
+
+            <label>Email:</label>
+            <input type="email" id="email" required>
+
+            <label>Contact Number:</label>
+            <input type="tel" id="contact" required>
+
+            <button type="submit">Submit Application</button>
+        </form>
+    </div>
+
+    <script>
+        // Get internship data from localStorage
+        const selectedInternship = JSON.parse(localStorage.getItem("selectedInternship"));
+        if (selectedInternship) {
+            document.getElementById("internshipTitle").value = selectedInternship.title;
+            document.getElementById("companyName").value = selectedInternship.company;
+        }
+
+        // Get logged-in intern details from localStorage
+        const loggedInEmail = localStorage.getItem("loggedInUser"); // store this during login
+        const interns = JSON.parse(localStorage.getItem("interns")) || [];
+        const loggedInIntern = interns.find(intern => intern.email === loggedInEmail);
+
+        if (loggedInIntern) {
+            document.getElementById("yourName").value = loggedInIntern.firstName + " " + loggedInIntern.lastName;
+            document.getElementById("email").value = loggedInIntern.email;
+            document.getElementById("contact").value = loggedInIntern.contact;
+        }
+
+        // Save application details
+        document.getElementById("applyForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const applications = JSON.parse(localStorage.getItem("applications")) || [];
+            applications.push({
+                title: document.getElementById("internshipTitle").value,
+                company: document.getElementById("companyName").value,
+                name: document.getElementById("yourName").value,
+                email: document.getElementById("email").value,
+                contact: document.getElementById("contact").value
+            });
+            localStorage.setItem("applications", JSON.stringify(applications));
+            alert("Application submitted successfully!");
+            window.location.href = "viewapply.html"; 
+        });
+    </script>
+</body>
+</html>

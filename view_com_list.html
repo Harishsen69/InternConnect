@@ -2,80 +2,47 @@
 <html lang="en">
 
 <head>
-<link rel="stylesheet" href="view_com_list.css">
     <meta charset="UTF-8">
     <title>Internship Cards</title>
-    
+    <link rel="stylesheet" href="view_com_list.css">
 </head>
 
 <body>
-
     <h1>Internship List</h1>
     <div id="internshipContainer"></div>
 
     <script>
         const internships = [
-            {
-                title: "Web Developer Intern",
-                company: "Yashvi Tech",
-                location: "Raipur",
-                link: "link"
-            },
-            {
-                title: "AI Intern",
-                company: "AI Labs",
-                location: "Mumbai",
-                link: "link"
-            },
-            {
-                title: "Marketing Intern",
-                company: "Promo House",
-                location: "Bangalore",
-                link: "link"
-            },
-            {
-                title: "Teaching intern",
-                company: "NIT",
-                location: "Raipur",
-                link: "link"
-            },
-            {
-                title: "Bank Intern",
-                company: "ICICI Bank",
-                location: "Durg",
-                link: "link bank"
-            },
-            {
-                title: "Managing intern",
-                company: "Avinash one",
-                location: "Raipur",
-                link: "link manager"
-            }
+            { title: "Web Developer Intern", company: "Yashvi Tech", location: "Raipur" },
+            { title: "AI Intern", company: "AI Labs", location: "Mumbai" },
+            { title: "Marketing Intern", company: "Promo House", location: "Bangalore" },
+            { title: "Teaching Intern", company: "NIT", location: "Raipur" },
+            { title: "Bank Intern", company: "ICICI Bank", location: "Durg" },
+            { title: "Managing Intern", company: "Avinash One", location: "Raipur" }
         ];
 
         const container = document.getElementById('internshipContainer');
 
-        internships.forEach((i) => {
+        internships.forEach((intern) => {
             const card = document.createElement('div');
             card.className = 'internship';
             card.innerHTML = `
-                <h2>${i.title}</h2>
-                <h3>${i.company}</h3>
-                <h3>${i.location}</h3>
-                <a href="${i.link}" target="_blank">
-                    <button class="apply-btn">Apply</button>
-                </a>
+                <h2>${intern.title}</h2>
+                <h3>${intern.company}</h3>
+                <p>${intern.location}</p>
+                <button class="apply-btn">Apply</button>
             `;
 
-            card.addEventListener('click', () => {
-                document.querySelectorAll('.internship').forEach(el => el.classList.remove('selected'));
-                card.classList.add('selected');
+            card.querySelector(".apply-btn").addEventListener("click", () => {
+                // Save internship data to localStorage
+                localStorage.setItem("selectedInternship", JSON.stringify(intern));
+                // Redirect to Apply Form
+                window.location.href = "ApplyForm.html";
             });
 
             container.appendChild(card);
         });
     </script>
-
 </body>
 
 </html>
