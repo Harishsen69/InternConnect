@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Comnany Login</h1>
+        <form id="loginForm">
+            <div class="row">
+                <div class="col">
+                    <label>Email</label>
+                    <input type="email" id="email" required placeholder="Enter your email">
+                    <label for="">Admin code</label>
+                    <input type="password" id="adminCode" required placeholder="eg. Admin@123">
+                </div>
+                <div class="col">
+                    <label>Password</label>
+                    <input type="password" id="password" required placeholder="Enter your password">
+                </div>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let email = document.getElementById("email").value;
+            let pass = document.getElementById("password").value;
+            let adminCode = document.getElementById("adminCode").value;
+            let interns = JSON.parse(localStorage.getItem("interns")) || [];
+
+            let user = interns.find(intern => intern.email === email && intern.password === pass);
+
+            if (user) {
+                // Store logged-in user's email for later use
+                localStorage.setItem("loggedInUser", user.email);
+
+                alert("Login Successful! Welcome " + user.firstName);
+                // Example: redirect to dashboard or internship list
+                window.location.href = "view_com_list.html";
+            } else {
+                alert("Invalid Email or Password!");
+            }
+        });
+    </script>
+
+    </script>
+</body>
+
+</html>
