@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Cards</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f2f2f2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        gap: 20px;
+    }
+    .card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        padding: 20px;
+        width: 200px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 6px 12px rgba(0,0,0,0.2);
+    }
+    .card h2 {
+        margin-bottom: 10px;
+        color: #333;
+    }
+    .card p {
+        color: #666;
+        font-size: 14px;
+    }
+</style>
+</head>
+<body>
+
+<div class="card" onclick="window.location.href='login_admin.html'">
+    <h2>Admin Login</h2>
+    <p>Click here to login as Admin</p>
+</div>
+
+<div class="card" onclick="window.location.href='login.html'">
+    <h2>User Login</h2>
+    <p>Click here to login as User</p>
+</div>
+
+</body>
+</html>
