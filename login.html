@@ -24,7 +24,8 @@
             </div>
 
             <button type="submit">Login</button>
-        </form>
+           <a href="ragistration.html">or ragistration
+        </form></a> 
     </div>
 
     <script>
@@ -42,7 +43,7 @@
                 // Store logged-in user's email for later use
                 localStorage.setItem("loggedInUser", user.email);
 
-                alert("Login Successful! Welcome " + user.firstName);
+                alert("Login Successful! Welcome " + user.email);
                 // Example: redirect to dashboard or internship list
                 window.location.href = "view_com_list.html";
             } else {
