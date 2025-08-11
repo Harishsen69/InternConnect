@@ -78,12 +78,13 @@
                         password: pass
                     };
 
-                    let interns = JSON.parse(localStorage.getItem("interns")) || [];
+                    let interns = JSON.parse(localStorage.getItem("admin")) || [];
                     interns.push(intern);
-                    localStorage.setItem("interns", JSON.stringify(interns));
+                    localStorage.setItem("admin", JSON.stringify(interns));
 
-                    alert("Registration Successful!");
+                    alert("Company Listed Successful!");
                     document.getElementById("internForm").reset();
+                    window.location.href="login_admin.html";
                 });
             </script>
 </body>

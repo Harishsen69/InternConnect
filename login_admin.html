@@ -36,17 +36,17 @@
             let email = document.getElementById("email").value;
             let pass = document.getElementById("password").value;
             let adminCode = document.getElementById("adminCode").value;
-            let interns = JSON.parse(localStorage.getItem("interns")) || [];
+            let interns = JSON.parse(localStorage.getItem("admin")) || [];
 
             let user = interns.find(intern => intern.email === email && intern.password === pass);
 
             if (user) {
                 // Store logged-in user's email for later use
-                localStorage.setItem("loggedInUser", user.email);
+                localStorage.setItem("loggedInAdmin", user.email);
 
                 alert("Login Successful! Welcome " + user.firstName);
                 // Example: redirect to dashboard or internship list
-                window.location.href = "view_com_list.html";
+                window.location.href = "apply_admin.html";
             } else {
                 alert("Invalid Email or Password!");
             }

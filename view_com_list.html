@@ -12,18 +12,12 @@
     <div id="internshipContainer"></div>
 
     <script>
-        const internships = [
-            { title: "Web Developer Intern", company: "Yashvi Tech", location: "Raipur" },
-            { title: "AI Intern", company: "AI Labs", location: "Mumbai" },
-            { title: "Marketing Intern", company: "Promo House", location: "Bangalore" },
-            { title: "Teaching Intern", company: "NIT", location: "Raipur" },
-            { title: "Bank Intern", company: "ICICI Bank", location: "Durg" },
-            { title: "Managing Intern", company: "Avinash One", location: "Raipur" }
-        ];
+        
+       const applications = JSON.parse(localStorage.getItem("applications")) || [];
 
         const container = document.getElementById('internshipContainer');
 
-        internships.forEach((intern) => {
+        applications.forEach((intern) => {
             const card = document.createElement('div');
             card.className = 'internship';
             card.innerHTML = `

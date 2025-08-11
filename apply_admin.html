@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Internship</title>
+    <link rel="stylesheet" href="ApplyForm.css">
+</head>
+
+<body>
+    <div class="apply-container">
+        <h1>List your Company</h1>
+        <form id="applyForm">
+
+            <label>Add title</label>
+            <input type="text" id="title">
+
+            <label>Company Name:</label>
+            <input type="text" id="companyName" readonly>
+
+            <label>Location:</label>
+            <input type="text" id="location" required>
+
+            <label>Email:</label>
+            <input type="email" id="email" required>
+
+            <label>Contact Number:</label>
+            <input type="tel" id="contact" required>
+
+            <label>Admin Code</label>
+            <input type="password" id="admin_code" required>
+
+            <button type="submit">Submit Application</button>
+        </form>
+    </div>
+
+    <script>
+        // Get admin data from localStorage
+        const selectedInternship = JSON.parse(localStorage.getItem("selectedInternship"));
+        if (selectedInternship) {
+            document.getElementById("email").value = selectedInternship.email;
+            document.getElementById("companyName").value = selectedInternship.companyName;
+            document.getElementById("location").value = selectedInternship.address
+        }
+
+        // Get logged-in admin details from localStorage
+        const loggedInEmail = localStorage.getItem("loggedInAdmin");
+        const interns = JSON.parse(localStorage.getItem("admin")) || [];
+        const loggedInIntern = interns.find(intern => intern.email === loggedInEmail);
+
+        if (loggedInIntern) {
+            document.getElementById("companyName").value = loggedInIntern.company;
+            document.getElementById("email").value = loggedInIntern.email;
+            document.getElementById("contact").value = loggedInIntern.contact;
+            document.getElementById("location").value = loggedInIntern.address;
+        }
+
+        // Save application details
+        document.getElementById("applyForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const applications = JSON.parse(localStorage.getItem("applications")) || [];
+            applications.push({
+                title: document.getElementById("title").value,
+                company: document.getElementById("companyName").value,
+                address: document.getElementById("location").value,
+                email: document.getElementById("email").value,
+                contact: document.getElementById("contact").value,
+                code: document.getElementById("admin_code").value
+            });
+
+            localStorage.setItem("applications", JSON.stringify(applications));
+            alert("Application submitted successfully!");
+            window.location.href = "view_com_list.html";
+        });
+    </script>
+</body>
+
+</html>
