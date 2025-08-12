@@ -13,11 +13,11 @@
 
     <script>
         
-       const applications = JSON.parse(localStorage.getItem("applications")) || [];
+       const companyListings = JSON.parse(localStorage.getItem("companyListings")) || [];
 
         const container = document.getElementById('internshipContainer');
 
-        applications.forEach((intern) => {
+        companyListings.forEach((intern) => {
             const card = document.createElement('div');
             card.className = 'internship';
             card.innerHTML = `
