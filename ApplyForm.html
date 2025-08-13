@@ -30,39 +30,39 @@
     </div>
 
     <script>
-        // Get internship data from localStorage
-        const selectedInternship = JSON.parse(localStorage.getItem("selectedInternship"));
-        if (selectedInternship) {
-            document.getElementById("internshipTitle").value = selectedInternship.title;
-            document.getElementById("companyName").value = selectedInternship.company;
-        }
+    const selectedInternship = JSON.parse(localStorage.getItem("selectedInternship"));
+    if (selectedInternship) {
+        document.getElementById("internshipTitle").value = selectedInternship.title;
+        document.getElementById("companyName").value = selectedInternship.company;
+    }
 
-        // Get logged-in intern details from localStorage
-        const loggedInEmail = localStorage.getItem("loggedInUser"); // store this during login
-        const interns = JSON.parse(localStorage.getItem("interns")) || [];
-        const loggedInIntern = interns.find(intern => intern.email === loggedInEmail);
+    const loggedInEmail = localStorage.getItem("loggedInUser");
+    const interns = JSON.parse(localStorage.getItem("interns")) || [];
+    const loggedInIntern = interns.find(intern => intern.email === loggedInEmail);
 
-        if (loggedInIntern) {
-            document.getElementById("yourName").value = loggedInIntern.firstName + " " + loggedInIntern.lastName;
-            document.getElementById("email").value = loggedInIntern.email;
-            document.getElementById("contact").value = loggedInIntern.contact;
-        }
+    if (loggedInIntern) {
+        document.getElementById("yourName").value = loggedInIntern.firstName + " " + loggedInIntern.lastName;
+        document.getElementById("email").value = loggedInIntern.email;
+        document.getElementById("contact").value = loggedInIntern.contact;
+    }
 
-        // Save application details
-        document.getElementById("applyForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            const applications = JSON.parse(localStorage.getItem("applications")) || [];
-            applications.push({
-                title: document.getElementById("internshipTitle").value,
-                company: document.getElementById("companyName").value,
-                name: document.getElementById("yourName").value,
-                email: document.getElementById("email").value,
-                contact: document.getElementById("contact").value
-            });
-            localStorage.setItem("applications", JSON.stringify(applications));
-            alert("Application submitted successfully!");
-            window.location.href = "ViewApply.html"; 
+    document.getElementById("applyForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const internshipApplications = JSON.parse(localStorage.getItem("internshipApplications")) || [];
+        internshipApplications.push({
+            title: document.getElementById("internshipTitle").value,
+            company: document.getElementById("companyName").value,
+            name: document.getElementById("yourName").value,
+            email: document.getElementById("email").value,
+            contact: document.getElementById("contact").value
         });
-    </script>
+
+        localStorage.setItem("internshipApplications", JSON.stringify(internshipApplications));
+        alert("Application submitted successfully!");
+        window.location.href = "ViewApply.html";
+    });
+</script>
+
 </body>
 </html>

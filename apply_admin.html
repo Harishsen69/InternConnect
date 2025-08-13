@@ -36,45 +36,42 @@
     </div>
 
     <script>
-        // Get admin data from localStorage
-        const selectedInternship = JSON.parse(localStorage.getItem("selectedInternship"));
-        if (selectedInternship) {
-            document.getElementById("email").value = selectedInternship.email;
-            document.getElementById("companyName").value = selectedInternship.companyName;
-            document.getElementById("location").value = selectedInternship.address
-        }
+    const selectedInternship = JSON.parse(localStorage.getItem("selectedInternship"));
+    if (selectedInternship) {
+        document.getElementById("email").value = selectedInternship.email;
+        document.getElementById("companyName").value = selectedInternship.companyName;
+        document.getElementById("location").value = selectedInternship.address;
+    }
 
-        // Get logged-in admin details from localStorage
-        const loggedInEmail = localStorage.getItem("loggedInAdmin");
-        const interns = JSON.parse(localStorage.getItem("admin")) || [];
-        const loggedInIntern = interns.find(intern => intern.email === loggedInEmail);
+    const loggedInEmail = localStorage.getItem("loggedInAdmin");
+    const admins = JSON.parse(localStorage.getItem("admin")) || [];
+    const loggedInAdmin = admins.find(admin => admin.email === loggedInEmail);
 
-        if (loggedInIntern) {
-            document.getElementById("companyName").value = loggedInIntern.company;
-            document.getElementById("email").value = loggedInIntern.email;
-            document.getElementById("contact").value = loggedInIntern.contact;
-            document.getElementById("location").value = loggedInIntern.address;
-        }
+    if (loggedInAdmin) {
+        document.getElementById("companyName").value = loggedInAdmin.company;
+        document.getElementById("email").value = loggedInAdmin.email;
+        document.getElementById("contact").value = loggedInAdmin.contact;
+        document.getElementById("location").value = loggedInAdmin.address;
+    }
 
-        // Save application details
-        document.getElementById("applyForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+    document.getElementById("applyForm").addEventListener("submit", function (e) {
+        e.preventDefault();
 
-            const applications = JSON.parse(localStorage.getItem("applications")) || [];
-            applications.push({
-                title: document.getElementById("title").value,
-                company: document.getElementById("companyName").value,
-                address: document.getElementById("location").value,
-                email: document.getElementById("email").value,
-                contact: document.getElementById("contact").value,
-                code: document.getElementById("admin_code").value
-            });
-
-            localStorage.setItem("applications", JSON.stringify(applications));
-            alert("Company Listed successfully!");
-            window.location.href = "view_com_list.html";
+        const companyListings = JSON.parse(localStorage.getItem("companyListings")) || [];
+        companyListings.push({
+            title: document.getElementById("title").value,
+            company: document.getElementById("companyName").value,
+            address: document.getElementById("location").value,
+            email: document.getElementById("email").value,
+            contact: document.getElementById("contact").value,
+            code: document.getElementById("admin_code").value
         });
-    </script>
+
+        localStorage.setItem("companyListings", JSON.stringify(companyListings));
+        alert("Company Listed successfully!");
+        window.location.href = "view_com_list.html";
+    });
+</script>
 </body>
 
 </html>
